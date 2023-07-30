@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      component: app-deployment
+  template:
+    metadata:
+      labels:
+        component: app-deployment
+    spec:
+      containers:
+        - name: healthcheckapp-container
+          image: vikonopleva/healthcheckapp
+          ports:
+            - containerPort: 8000
