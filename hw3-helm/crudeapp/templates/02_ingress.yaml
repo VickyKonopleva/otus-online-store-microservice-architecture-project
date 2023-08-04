@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "crudeapp.fullname" . }}-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths: 
+        - path: /otusapp/victoria(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "crudeapp.fullname" . }}
+              port: 
+                number: {{ .Values.deployment.appPort }}
