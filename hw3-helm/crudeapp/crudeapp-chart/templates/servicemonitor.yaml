@@ -1,0 +1,20 @@
+{{- if .Values.metrics.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "crudeapp.fullname" . }}-monitor
+  labels:
+    app: {{ include "crudeapp.fullname" . }}
+spec:
+  jobLabel: {{ include "crudeapp.fullname" . }}
+  namespaceSelector:
+      matchNames:
+      - "{{ $.Release.Namespace }}"
+  selector:
+    matchLabels:
+      app: {{ include "crudeapp.fullname" . }}
+  endpoints:
+  - interval: 15s
+    port: web
+    path: /prometheus
+{{- end }}

@@ -1,4 +1,6 @@
-To deploy the app run the following:
+hw3
+
+To deploy the app run the following inside crudeapp-chart folder:
 
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
@@ -11,8 +13,45 @@ helm repo update
 
 helm install release-1 crudeapp-0.1.0.tgz -f values.yaml
 
-Port-frowarding
+Port-forwarding
 kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8000:80 
 
 check: 
 curl --resolve "arch.homework:8000:127.0.0.1" -i http://arch.homework:8000/otusapp/victoria/users/1
+
+hw4 
+
+To deploy the app run the following inside crudeapp folder:
+
+INGRESS
+
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace \
+  --set controller.metrics.enabled=true \
+  --set controller.metrics.serviceMonitor.enabled=true 
+minikube addons enable ingress
+
+PROMETHEUS
+
+kubectl create ns monitoring
+kubectl config set-context --current --namespace=monitoring
+
+helm install prometheus prometheus-community/kube-prometheus-stack
+--set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues=false \
+--set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
+
+kubectl port-forward service/prometheus-grafana 9000:80 
+
+kubectl port-forward service/prometheus-kube-prometheus-prometheus 9090
+
+APP
+
+Helm package .
+
+helm repo update
+
+helm install release-1 /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw3-helm/crudeapp/crudeapp-0.1.0.tgz -f crudeapp-chart/values.yaml
+
+Port-forwarding
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8000:80 

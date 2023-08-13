@@ -4,7 +4,7 @@ deployment:
   replicas: 3
   appImage: 
     repository: vikonopleva/crudeapp
-    tag: 1.7
+    tag: 1.8
   appPort: 8000
 
 service:
@@ -18,3 +18,7 @@ postgresql:
   enabled: true
   auth:
     postgresPassword: vika
+
+metrics:
+  serviceMonitor:
+    enabled: true
