@@ -36,22 +36,25 @@ PROMETHEUS
 
 kubectl create ns monitoring
 kubectl config set-context --current --namespace=monitoring
-
-helm install prometheus prometheus-community/kube-prometheus-stack
---set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues=false \
---set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
 
 kubectl port-forward service/prometheus-grafana 9000:80 
 
 kubectl port-forward service/prometheus-kube-prometheus-prometheus 9090
 
 APP
+in folder crudeapp-chart:
 
 Helm package .
 
 helm repo update
 
-helm install release-1 /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw3-helm/crudeapp/crudeapp-0.1.0.tgz -f crudeapp-chart/values.yaml
+helm install release-1 /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw3-helm-hw4-prometheus/crudeapp/crudeapp-chart/crudeapp-0.1.0.tgz -f values.yaml
 
 Port-forwarding
-kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8000:80 
+kubectl port-forward --namespace=monitoring service/ingress-nginx-controller 8000:80 
+OR
+minikube tunnel 

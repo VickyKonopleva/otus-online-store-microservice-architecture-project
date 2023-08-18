@@ -4,7 +4,7 @@ deployment:
   replicas: 3
   appImage: 
     repository: vikonopleva/crudeapp
-    tag: 1.8
+    tag: 1.11
   appPort: 8000
 
 service:

@@ -59,28 +59,28 @@
         "steppedLine": false,
         "targets": [
             {
-                "expr": "quantile(0.5, http_server_requests_active_seconds_duration_sum{method='GET'})",
+                "expr": "histogram_quantile(0.5, sum(rate(http_server_requests_seconds_bucket{method = 'GET'}[5m])) by (le))",
                 "interval": "",
                 "legendFormat": "0.5 quantile",
                 "refId": "A",
                 "datasource": "Prometheus"
                 },
           {
-            "expr": "quantile(0.95, http_server_requests_active_seconds_duration_sum{method='GET'})",
+            "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{method = 'GET'}[5m])) by (le))",
             "interval": "",
             "legendFormat": "0.95 quantile",
             "refId": "B",
             "datasource": "Prometheus"
           },
           {
-            "expr": "quantile(0.99, http_server_requests_active_seconds_duration_sum{method='GET'})",
+            "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{method = 'GET'}[5m])) by (le))",
             "interval": "",
             "legendFormat": "0.99 quantile",
             "refId": "C",
             "datasource": "Prometheus"
           },
           {
-            "expr": "max(http_server_requests_active_seconds_duration_sum{method='GET'})",
+            "expr": "max(http_server_requests_seconds_bucket{method='GET'})",
             "interval": "",
             "legendFormat": "max",
             "refId": "D",
@@ -204,28 +204,28 @@
         "steppedLine": false,
         "targets": [
             {
-                "expr": "quantile(0.5, http_server_requests_active_seconds_duration_sum{method='POST'})",
+                "expr": "histogram_quantile(0.5, sum(rate(http_server_requests_seconds_bucket{method = 'POST'}[5m])) by (le))",
                 "interval": "",
                 "legendFormat": "0.5 quantile",
                 "refId": "A",
                 "datasource": "Prometheus"
                 },
           {
-            "expr": "quantile(0.95, http_server_requests_active_seconds_duration_sum{method='POST'})",
+            "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{method = 'POST'}[5m])) by (le))",
             "interval": "",
             "legendFormat": "0.95 quantile",
             "refId": "B",
             "datasource": "Prometheus"
           },
           {
-            "expr": "quantile(0.99, http_server_requests_active_seconds_duration_sum{method='POST'})",
+            "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{method = 'POST'}[5m])) by (le))",
             "interval": "",
             "legendFormat": "0.99 quantile",
             "refId": "C",
             "datasource": "Prometheus"
           },
           {
-            "expr": "max(http_server_requests_active_seconds_duration_sum{method='POST'})",
+            "expr": "max(http_server_requests_seconds_bucket{method='POST'})",
             "interval": "",
             "legendFormat": "max",
             "refId": "D",
