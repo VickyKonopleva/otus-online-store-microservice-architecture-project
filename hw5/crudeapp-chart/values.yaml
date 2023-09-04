@@ -1,0 +1,24 @@
+fullnameOverride: crude-app
+
+deployment:
+  replicas: 3
+  appImage: 
+    repository: vikonopleva/crudeapp
+    tag: 1.15
+  appPort: 8000
+
+service:
+  appPort: 8000
+  serviceType: ClusterIP
+
+gateway:
+  prefix: /otusapp/victoria/
+
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: vika
+
+metrics:
+  serviceMonitor:
+    enabled: true
