@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: {{ .Values.deployment.appImage.repository }}:{{ .Values.deployment.appImage.tag }}
+          image: {{ .Values.deployment.appImage.repository }}:{{ .Chart.AppVersion }}
           envFrom:
             - configMapRef:
                 name: {{ include "crudeapp.fullname" . }}-configmap
