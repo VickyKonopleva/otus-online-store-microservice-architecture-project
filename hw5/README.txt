@@ -25,3 +25,9 @@ cd istio
 kubectl apply -f samples/addons
 kubectl rollout status deployment/kiali -n istio-system
 istioctl dashboard kiali
+
+RUN REQUEST COLLECTION
+
+npm install -g newman
+newman run Otus-hw5.postman_collection.json
+

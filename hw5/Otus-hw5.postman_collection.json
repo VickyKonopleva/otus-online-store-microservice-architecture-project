@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "8a188815-77de-47df-bde8-1b2aa1a57167",
+		"name": "Otus-hw5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18960738"
+	},
+	"item": [
+		{
+			"name": "register new user",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"UserAdded2UpdatedAgain\",\n\t\"lastName\": \"Userov30\",\n\t\"email\": \"someUser5@user.com\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/register",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check access without creds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"current",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get registered user data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check response body\", function () {",
+							"    var expectedResponse = {",
+							"    \"firstName\": \"UserAdded2UpdatedAgain\",",
+							"    \"lastName\": \"Userov30\",",
+							"    \"email\": \"User6@user.com\",",
+							"    \"password\": null,",
+							"    \"role\": \"ROLE_USER\"",
+							"};",
+							"",
+							"    pm.response.to.have.jsonBody(expectedResponse);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "User6@user.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"current",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update current user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "User6@user.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"UpdatedData\",\n\t\"lastName\": \"UpdatedData\",\n\t\"email\": \"User6@user.com\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"current",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check update user info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body({",
+							"    \"firstName\": \"UpdatedData\",",
+							"    \"lastName\": \"UpdatedData\",",
+							"    \"email\": \"User6@user.com\",",
+							"    \"password\": null,",
+							"    \"role\": \"ROLE_USER\"",
+							"});",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "User6@user.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"current",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
