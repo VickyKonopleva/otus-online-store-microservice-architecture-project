@@ -1,0 +1,23 @@
+fullnameOverride: users
+
+deployment:
+  replicas: 3
+  appImage: 
+    repository: vikonopleva/users
+  appPort: 8000
+
+service:
+  appPort: 8000
+  serviceType: ClusterIP
+
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: pass
+  initdbScripts:
+    init-users-schema.sql: |
+      CREATE SCHEMA IF NOT EXISTS USERS;
+
+metrics:
+  serviceMonitor:
+    enabled: true

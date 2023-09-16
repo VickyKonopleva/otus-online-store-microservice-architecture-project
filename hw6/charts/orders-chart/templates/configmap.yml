@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "orders.fullname" . }}-configmap
+data:
+  DB_USERNAME: postgres
+  DB_URL: jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/
+  AUTH_SERVER_URL: http://users.default.svc.cluster.local:8000

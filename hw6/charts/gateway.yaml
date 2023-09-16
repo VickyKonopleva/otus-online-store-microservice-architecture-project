@@ -1,0 +1,47 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: shop-gateway
+spec:
+  # The selector matches the ingress gateway pod labels.
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: shop-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - shop-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /otusapp/victoria/users
+    rewrite:
+      uri: /users
+    route:
+    - destination:
+        host: users
+        port:
+          number: 8000
+  - match:
+    - uri:
+        prefix: /otusapp/victoria/orders
+    rewrite:
+      uri: /orders
+    route:
+    - destination:
+        host: orders
+        port:
+          number: 8001
+  
