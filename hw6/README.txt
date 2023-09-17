@@ -16,6 +16,9 @@ helm repo update
 
 helm install release-1 /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw5/crudeapp-chart/crudeapp-0.1.0.tgz -f values.yaml
 
+GATEWAY
+kubectl apply -f gateway.yaml
+
 minikube tunnel
 
 VIEW the DASHBOARDS
@@ -29,5 +32,5 @@ istioctl dashboard kiali
 RUN REQUEST COLLECTION
 
 npm install -g newman
-newman run Otus-hw5.postman_collection.json
+newman run Otus-hw6.postman_collection.json
 

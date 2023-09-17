@@ -22,6 +22,9 @@ Helm package .
 
 helm install release-orders /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw6/charts/orders-chart/orders-0.1.0.tgz -f values.yaml
 
+GATEWAY
+kubectl apply -f gateway.yaml
+
 minikube tunnel
 
 VIEW the DASHBOARDS
@@ -35,5 +38,5 @@ istioctl dashboard kiali
 RUN REQUEST COLLECTION
 
 npm install -g newman
-newman run Otus-hw5.postman_collection.json
+newman run Otus-hw6.postman_collection.json
 

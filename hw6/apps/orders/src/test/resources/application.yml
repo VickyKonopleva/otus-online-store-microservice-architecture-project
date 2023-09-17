@@ -1,0 +1,29 @@
+server:
+    servlet.context-path: /
+    port: 8000
+
+spring:
+    datasource:
+      url: jdbc:h2:mem:default
+      username: Victoria
+      password:
+    liquibase:
+      url: ${spring.datasource.url}
+      user: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      change-log: "classpath:db/update.xml"
+      enabled: false
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health
+management.endpoints.web.base-path: /
+
+outbound:
+  authProviderUrl: http://localhost:8000/users/auth
+
+
+
+
+

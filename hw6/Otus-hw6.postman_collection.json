@@ -1,22 +1,35 @@
 {
 	"info": {
-		"_postman_id": "8a188815-77de-47df-bde8-1b2aa1a57167",
-		"name": "Otus-hw5",
+		"_postman_id": "1743738e-0add-4bee-bf5f-f40be186b051",
+		"name": "Otus-hw6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18960738"
 	},
 	"item": [
 		{
 			"name": "register new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
-					"type": "basic"
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"UserAdded2UpdatedAgain\",\n\t\"lastName\": \"Userov30\",\n\t\"email\": \"someUser5@user.com\",\n\t\"password\": \"password\"\n}",
+					"raw": "{\n\t\"firstName\": \"UserAdded2UpdatedAgain\",\n\t\"lastName\": \"Userov30\",\n\t\"email\": \"User7@user.com\",\n\t\"password\": \"password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,7 +37,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/otusapp/victoria/register",
+					"raw": "http://arch.homework/otusapp/victoria/users/register",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -33,6 +46,7 @@
 					"path": [
 						"otusapp",
 						"victoria",
+						"users",
 						"register"
 					]
 				}
@@ -56,12 +70,24 @@
 			],
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"raw": "http://arch.homework/otusapp/victoria/users/current/",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -70,6 +96,7 @@
 					"path": [
 						"otusapp",
 						"victoria",
+						"users",
 						"current",
 						""
 					]
@@ -106,7 +133,7 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "User6@user.com",
+							"value": "User7@user.com",
 							"type": "string"
 						},
 						{
@@ -119,7 +146,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"raw": "http://arch.homework/otusapp/victoria/users/current/",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -128,6 +155,7 @@
 					"path": [
 						"otusapp",
 						"victoria",
+						"users",
 						"current",
 						""
 					]
@@ -156,7 +184,7 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "User6@user.com",
+							"value": "User7@user.com",
 							"type": "string"
 						},
 						{
@@ -170,7 +198,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"UpdatedData\",\n\t\"lastName\": \"UpdatedData\",\n\t\"email\": \"User6@user.com\",\n\t\"password\": \"password\"\n}",
+					"raw": "{\n\t\"firstName\": \"UpdatedData\",\n\t\"lastName\": \"UpdatedData\",\n    \"password\": \"password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -178,7 +206,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"raw": "http://arch.homework/otusapp/victoria/users/current/",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -187,6 +215,7 @@
 					"path": [
 						"otusapp",
 						"victoria",
+						"users",
 						"current",
 						""
 					]
@@ -205,8 +234,8 @@
 							"    pm.response.to.have.body({",
 							"    \"firstName\": \"UpdatedData\",",
 							"    \"lastName\": \"UpdatedData\",",
-							"    \"email\": \"User6@user.com\",",
-							"    \"password\": null,",
+							"    \"email\": \"User7@user.com\",",
+							"    \"password\": \"secured\",",
 							"    \"role\": \"ROLE_USER\"",
 							"});",
 							"});"
@@ -221,7 +250,7 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "User6@user.com",
+							"value": "User7@user.com",
 							"type": "string"
 						},
 						{
@@ -234,7 +263,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://arch.homework/otusapp/victoria/current/",
+					"raw": "http://arch.homework/otusapp/victoria/users/current/",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -243,7 +272,126 @@
 					"path": [
 						"otusapp",
 						"victoria",
+						"users",
 						"current",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new order unauth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Use@user.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\": \"items\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/orders/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new order auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "User7@user.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\": \"items\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/victoria/orders/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"victoria",
+						"orders",
 						""
 					]
 				}
