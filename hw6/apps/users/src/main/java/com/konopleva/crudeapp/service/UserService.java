@@ -1,12 +1,16 @@
 package com.konopleva.crudeapp.service;
 
 import com.konopleva.crudeapp.dto.UserDto;
+import com.konopleva.crudeapp.dto.kafka.UserStateDto;
+import com.konopleva.crudeapp.mapper.KafkaBusinessDataMapper;
 import com.konopleva.crudeapp.repository.UserRepository;
 import com.konopleva.crudeapp.mapper.UserDtoMapper;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Value("${kafka.topics.user-state}")
+    private String userStateTopic;
     private final UserRepository repository;
 
     private final UserDtoMapper userDtoMapper;
+
+    private final KafkaTemplate<String, UserStateDto> kafkaTemplate;
+
+    private final KafkaBusinessDataMapper kafkaBusinessDataMapper;
 
     @Transactional(readOnly = true)
     public UserDto getUserById(String id) {
@@ -40,6 +50,10 @@ public class UserService {
             var entity = userDtoMapper.mapToUser(dto);
             repository.save(entity);
             log.info("User with email = {} created", entity.getEmail());
+            log.info("Start sending UserCreated message to Kafka");
+            var command = kafkaBusinessDataMapper.createUserState(entity);
+            kafkaTemplate.send(userStateTopic, command);
+            log.info("UserCreated message sent to Kafka");
         });
     }
     @Transactional
@@ -54,7 +68,6 @@ public class UserService {
         entity.ifPresentOrElse(user -> {
             user
                 .setFirstName(dto.getFirstName())
-                .setPassword(dto.getPassword())
                 .setLastName(dto.getLastName());
             repository.save(user);
             log.info("User with email = {} updated", user.getEmail());

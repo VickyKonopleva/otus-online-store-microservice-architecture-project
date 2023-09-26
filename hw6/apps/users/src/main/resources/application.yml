@@ -21,6 +21,11 @@ spring:
     hibernate:
       ddl-auto: none
 
+kafka:
+  topics:
+    user-state: USER_STATE
+  bootstrap-servers: 127.0.0.1:9092
+
 management.endpoints.web.exposure.include: health, prometheus
 management.endpoint.prometheus.enabled: true
 management.endpoints.web.base-path: /

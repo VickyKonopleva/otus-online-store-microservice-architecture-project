@@ -6,6 +6,7 @@ import com.konopleva.crudeapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class CurrentUserController {
                 .setRole(user.getRole().getAuthority());
     }
 
-    @PutMapping("/")
+    @PatchMapping("/")
     public void updateUser( @RequestBody UserDto dto) {
         var user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         service.updateUser(user.getEmail(), dto);

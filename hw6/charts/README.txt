@@ -1,4 +1,8 @@
-hw5
+hw6
+
+KAFKA
+install kafka 
+create topic user_state
 
 ISTIO
 
@@ -24,6 +28,7 @@ helm install release-orders /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw6/cha
 
 GATEWAY
 kubectl apply -f gateway.yaml
+(*kubectl delete validatingwebhookconfiguration istiod-default-validator )
 
 minikube tunnel
 

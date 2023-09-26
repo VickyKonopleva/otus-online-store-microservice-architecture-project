@@ -1,5 +1,6 @@
-package com.konopleva.crudeapp.util;
+package com.konopleva.crudeapp.exception.handler;
 
+import com.konopleva.crudeapp.exception.IdempotenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,6 +19,12 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleCustomHttpClientErrorException(BadCredentialsException ex) {
+        String errorMessage = "Custom Error: " + ex.getMessage();
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IdempotenceException.class)
+    public ResponseEntity<String> handleCustomHttpClientErrorException(IdempotenceException ex) {
         String errorMessage = "Custom Error: " + ex.getMessage();
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }

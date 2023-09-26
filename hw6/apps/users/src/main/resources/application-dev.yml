@@ -19,4 +19,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+kafka:
+  topics:
+    user-state: USERS.USER_STATE
+  bootstrap-servers: ${BOOTSTRAP_SERVERS}
+
 

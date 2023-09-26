@@ -9,13 +9,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Base64;
 
 @Component
-public class RequestInterceptor implements HandlerInterceptor {
+public class AuthRequestInterceptor implements HandlerInterceptor {
     @Value("${outbound.authProviderUrl}")
     private String apiAuthServiceUrl;
 

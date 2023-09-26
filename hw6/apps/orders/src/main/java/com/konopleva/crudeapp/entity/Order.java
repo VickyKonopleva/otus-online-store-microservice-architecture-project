@@ -13,6 +13,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Builder
@@ -31,5 +33,10 @@ public class Order {
     private String associatedUserEmail;
 
     private String description;
+
+    private Integer price;
+
+    @Column(name = "creation_time")
+    private LocalDateTime creationTime = LocalDateTime.now();
 
 }

@@ -1,4 +1,5 @@
-package com.konopleva.crudeapp.dto;
+package com.konopleva.crudeapp.dto.kafka;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDto {
-    private String description;
-    private Integer price;
+public class UserStateDto {
+
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
 }
