@@ -1,4 +1,8 @@
-hw5
+hw6
+
+KAFKA
+install KAFKA
+kreate topic user_state
 
 ISTIO
 
@@ -8,13 +12,21 @@ istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 
 APP
-in folder crudeapp-chart:
+in folder users-chart:
 
 Helm package .
 
 helm repo update
 
-helm install release-1 /Users/viktoriakonopleva/desktop/otus-hw/k8s/hw5/crudeapp-chart/crudeapp-0.1.0.tgz -f values.yaml
+helm install users-release users-0.1.0.tgz -f values.yaml
+
+in folder orders-chart:
+
+Helm package .
+
+helm repo update
+
+helm install orders-release orders-0.1.0.tgz -f values.yaml
 
 GATEWAY
 kubectl apply -f gateway.yaml
