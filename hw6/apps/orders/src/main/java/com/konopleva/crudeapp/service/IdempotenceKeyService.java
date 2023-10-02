@@ -1,7 +1,9 @@
 package com.konopleva.crudeapp.service;
 
 import com.konopleva.crudeapp.exception.IdempotenceException;
+import com.konopleva.crudeapp.repository.RedisIdempotenceKeyRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,22 +12,25 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class IdempotenceKeyService {
-    public static List<String> IDEMPOTENCE_KEYS = new ArrayList<>();
+//    public static List<String> IDEMPOTENCE_KEYS = new ArrayList<>();
+    private final RedisIdempotenceKeyRepository redisRepository;
 
     public String generateKey() {
         var key = String.valueOf(UUID.randomUUID());
-        IDEMPOTENCE_KEYS.add(key);
+        redisRepository.add(key);
+//        IDEMPOTENCE_KEYS.add(key);
         return key;
     }
 
     public boolean checkIdempotenceKey(HttpServletRequest request) {
-        String key = request.getHeader("x-request-id");
+        String key = request.getHeader("x-idempotence-key");
         if (key == null) {
             throw new IdempotenceException("Idempotence key missing");
         }
-        if (!IDEMPOTENCE_KEYS.remove(key)) {
+        if (!redisRepository.delete(key)) {
             throw new IdempotenceException("Wrong idempotence key");
         }
 

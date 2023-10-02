@@ -513,7 +513,7 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "x-request-id",
+						"key": "x-idempotence-key",
 						"value": "{{key}}",
 						"type": "text"
 					}
@@ -579,7 +579,7 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "x-request-id",
+						"key": "x-idempotence-key",
 						"value": "{{key}}",
 						"type": "text"
 					}

@@ -13,6 +13,10 @@ spring:
       password: ${spring.datasource.password}
       change-log: "classpath:db/update.xml"
       enabled: false
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: pass
 management:
     endpoints:
         web:

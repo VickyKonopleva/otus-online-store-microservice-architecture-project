@@ -23,6 +23,10 @@ spring:
 
 outbound:
   authProviderUrl: http://localhost:8000/users/auth
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: pass
 
 management.endpoints.web.exposure.include: health, prometheus
 management.endpoint.prometheus.enabled: true

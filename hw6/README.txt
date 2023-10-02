@@ -11,6 +11,12 @@ export PATH=$PWD/bin:$PATH
 istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 
+REDIS
+helm install redis-test bitnami/redis
+get redis password
+export REDIS_PASSWORD=$(kubectl get secret --namespace default redis-test -o jsonpath="{.data.redis-password}" | base64 --decode)
+set password to oreders-chart configmap
+
 APP
 in folder users-chart:
 

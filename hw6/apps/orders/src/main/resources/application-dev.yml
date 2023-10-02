@@ -21,5 +21,9 @@ spring:
 
 outbound:
   authProviderUrl: ${AUTH_SERVER_URL}/users/auth
+redis:
+  host: ${REDIS_HOSTNAME:127.0.0.1}
+  port: ${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD}
 
 
