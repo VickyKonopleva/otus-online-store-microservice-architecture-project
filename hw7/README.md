@@ -4,11 +4,11 @@
 
 Общая схема взаимодействия микросервисов, назначение каждого из сервисов, зона ответственности:
 
-![Getting Started](schemas/services_responsibilities.pdf)
+![Getting Started](img/services_responsibilities.pdf)
 
 Пользовательские сценарии:
 
-![Getting Started](schemas/Online-store diagram.pdf)
+![Getting Started](img/Online-store-diagram.pdf)
 
 Контракты сервисов:
 
