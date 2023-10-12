@@ -7,4 +7,17 @@
 Контракты сервисов:
 
 USERS
+
 ![Getting Started](img/users_swagger.png)
+
+ORDERS
+
+![Getting Started](img/orders_swagger.png)
+
+BILLING
+
+![Getting Started](img/billing_swagger.png)
+
+NOTIFICATIONS
+
+![Getting Started](img/notifications_swagger.png)
