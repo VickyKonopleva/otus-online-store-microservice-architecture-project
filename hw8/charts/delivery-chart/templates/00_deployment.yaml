@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "delivery.fullname" . }}-deploy
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "delivery.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "delivery.fullname" . }}
+      annotations:                              
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8003"
+        prometheus.io/path: /prometheus
+    spec:
+      containers:
+        - name: spring-app
+          image: {{ .Values.deployment.appImage.repository }}:{{ .Chart.AppVersion }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "delivery.fullname" . }}-configmap
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "delivery.fullname" . }}-secret
+                  key: postgres-password
+          ports:
+            - containerPort: {{ .Values.deployment.appPort }}

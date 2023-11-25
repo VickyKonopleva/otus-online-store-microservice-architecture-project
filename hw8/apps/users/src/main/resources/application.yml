@@ -1,0 +1,46 @@
+server:
+    servlet.context-path: /
+    port: 8000
+
+spring:
+  datasource:
+      url: jdbc:h2:mem:default
+      username: Victoria
+      password:
+  liquibase:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    change-log: "classpath:db.changelog/update.xml"
+    enabled: true
+    drop-first: false
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+kafka:
+  topics:
+    user-state: USER_STATE
+  bootstrap-servers: 127.0.0.1:9092
+
+management.endpoints.web.exposure.include: health, prometheus
+management.endpoint.prometheus.enabled: true
+management.endpoints.web.base-path: /
+management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
+
+
+
+
+
+
+
+
+

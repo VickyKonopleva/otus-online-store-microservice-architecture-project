@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      component: app-deployment
+  template:
+    metadata:
+      labels:
+        component: app-deployment
+    spec:
+      containers:
+        - name: crudeapp-container
+          image: vikonopleva/crudeapp:1.2
+          envFrom:
+            - configMapRef:
+                name: postgres-configmap
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
+          ports:
+            - containerPort: 8000

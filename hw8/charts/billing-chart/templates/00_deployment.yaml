@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "billing.fullname" . }}-deploy
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "billing.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "billing.fullname" . }}
+      annotations:                              
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8002"
+        prometheus.io/path: /prometheus
+    spec:
+      containers:
+        - name: spring-app
+          image: {{ .Values.deployment.appImage.repository }}:{{ .Chart.AppVersion }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "billing.fullname" . }}-configmap
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "billing.fullname" . }}-secret
+                  key: postgres-password
+          ports:
+            - containerPort: {{ .Values.deployment.appPort }}

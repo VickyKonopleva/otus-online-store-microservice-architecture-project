@@ -1,0 +1,26 @@
+fullnameOverride: billing
+
+deployment:
+  replicas: 3
+  appImage: 
+    repository: vikonopleva/billing
+  appPort: 8002
+
+service:
+  appPort: 8002
+  serviceType: ClusterIP
+
+gateway:
+  prefix: /otusapp/victoria/
+
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: vika
+  initdbScripts:
+    init-users-schema.sql: |
+      CREATE SCHEMA IF NOT EXISTS BILLING;
+
+metrics:
+  serviceMonitor:
+    enabled: true
