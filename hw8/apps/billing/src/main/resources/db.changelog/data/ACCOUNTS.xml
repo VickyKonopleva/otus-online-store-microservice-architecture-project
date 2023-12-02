@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+    <changeSet  author="${author}"  id="2988d27a-4471-4309-99dd-6cd172fc641a">
+        <insert tableName="ACCOUNTS">
+            <column name="ID" value="2fcccaaf-9a55-4136-af2f-2d1d8eaf7012"/>
+            <column name="EMAIL" value="User1@user.com"/>
+            <column name="USERNAME" value="User1 Userov1"/>
+            <column name="BALANCE" value="1000"/>
+            <column name="CREATE_DATE" value="2023-09-24"/>
+            <column name="UPDATED_TIME" value="2023-09-24T15:30:00"/>
+        </insert>
+        <insert tableName="ACCOUNTS">
+            <column name="ID" value="6071dd64-bdd6-48d8-bd59-0fc43881ab69"/>
+            <column name="EMAIL" value="User2@user.com"/>
+            <column name="USERNAME" value="User2 Userov2"/>
+            <column name="BALANCE" value="2000"/>
+            <column name="CREATE_DATE" value="2023-08-24"/>
+            <column name="UPDATED_TIME" value="2023-09-24T15:30:00"/>
+        </insert>
+        <insert tableName="ACCOUNTS">
+            <column name="ID" value="c416cdad-205f-4a05-817c-3a22e949e22d"/>
+            <column name="EMAIL" value="User3@user.com"/>
+            <column name="USERNAME" value="User3 Userov3"/>
+            <column name="BALANCE" value="3000"/>
+            <column name="CREATE_DATE" value="2023-07-24"/>
+            <column name="UPDATED_TIME" value="2023-08-24T15:30:00"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

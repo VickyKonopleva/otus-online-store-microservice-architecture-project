@@ -10,8 +10,10 @@
             <column name="ID" value="89e57aae-46d7-4018-8f1e-829170e32aaa"/>
             <column name="ASSOCIATED_USER_EMAIL" value="User1@user.com"/>
             <column name="DESCRIPTION" value="Items of the 1st user"/>
+            <column name="ADDRESS" value="12, Volkhonka, Moscow"/>
             <column name="PRICE" value="1000"/>
             <column name="CREATION_TIME" value="2023-09-24T15:30:00"/>
+            <column name="STATUS" value="PENDING"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

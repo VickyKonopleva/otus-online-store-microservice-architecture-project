@@ -23,9 +23,27 @@ management:
             exposure:
                 include: health
 management.endpoints.web.base-path: /
-
+kafka:
+  consumer:
+    group-id: local-orders
+    properties:
+      spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+      spring.json.value.default.type: java.lang.String
+      spring.deserializer.key.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+  topics:
+    order-state: ORDER_STATE
+    order-payment-accepted: ORDER_PAYMENT
+    order-payment-declined: ORDER_DECLINED
+    item-reserve-cancelled: RESERVE_CANCEL
+    order-delivery-cancel: DELIVERY_CANCEL
+    order-delivery-scheduled: DELIVERY_START
+    order-delivery-completed: DELIVERY_END
+  bootstrap-servers: 127.0.0.1:9092
+jwt:
+  secret: secret
 outbound:
   authProviderUrl: http://localhost:8000/users/auth
+  billingServiceUrl: http://localhost:8002/billing
 
 
 

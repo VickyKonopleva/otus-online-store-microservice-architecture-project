@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+    <changeSet  author="${author}"  id="ca39df18-a141-4a97-a68d-efbb527e733c">
+        <createTable tableName="DELIVERIES">
+            <column  name="ID"  type="VARCHAR(64)">
+                <constraints nullable="false" unique = "true" />
+            </column>
+            <column  name="ORDER_ID"  type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column  name="ASSOCIATED_USER"  type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column  name="ADDRESS"  type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column  name="PLANNED_DELIVERY_TIME"  type="DATETIME">
+            </column>
+            <column name="ACTUAL_DELIVERY_TIME" type="DATETIME"/>
+            <column  name="STATUS"  type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -13,11 +13,15 @@ spring:
       password: ${spring.datasource.password}
       change-log: "classpath:db/update.xml"
       enabled: false
+      default-schema: USERS
 
 kafka:
   topics:
     user-state: USERS.USER_STATE
   bootstrap-servers: 127.0.0.1:9092
+
+jwt:
+  secret: secret
 
 management:
     endpoints:

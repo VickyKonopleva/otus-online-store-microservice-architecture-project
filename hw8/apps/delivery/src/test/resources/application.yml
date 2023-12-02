@@ -1,0 +1,51 @@
+server:
+    servlet.context-path: /
+    port: 8000
+
+spring:
+    datasource:
+      url: jdbc:h2:mem:default
+      username: Victoria
+      password:
+    liquibase:
+      url: ${spring.datasource.url}
+      user: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      change-log: "classpath:db/update.xml"
+      enabled: false
+kafka:
+  consumer:
+    group-id: local-delivery
+    properties:
+      spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+      spring.json.value.default.type: java.lang.String
+      spring.deserializer.key.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+  topics:
+    user-state: USERS.USER_STATE
+    order-state: ORDER_STATE
+    order-payment-accepted: ORDER_PAYMENT
+    item-reserve-cancelled: RESERVE_CANCEL
+    order-delivery-scheduled: DELIVERY_START
+    order-delivery-completed: DELIVERY_END
+    order-delivery-cancel: DELIVERY_CANCEL
+  bootstrap-servers: 127.0.0.1:9092
+
+jwt:
+  secret: secret
+
+outbound:
+  authProviderUrl: http://localhost:8000/users/auth
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health
+management.endpoints.web.base-path: /
+
+
+
+
+
+
+

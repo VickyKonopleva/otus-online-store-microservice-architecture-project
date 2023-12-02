@@ -2,6 +2,8 @@ package com.konopleva.crudeapp.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -36,7 +38,12 @@ public class Order {
 
     private Integer price;
 
+    private String address;
+
     @Column(name = "creation_time")
     private LocalDateTime creationTime = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.PENDING;
 
 }

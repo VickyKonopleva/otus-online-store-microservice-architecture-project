@@ -4,6 +4,6 @@ metadata:
   name: {{ include "delivery.fullname" . }}-configmap
 data:
   DB_USERNAME: postgres
-  DB_URL: jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/
+  DB_URL: jdbc:postgresql://users-chart-postgresql:5432/
   AUTH_SERVER_URL: http://users.default.svc.cluster.local:8000
   BOOTSTRAP_SERVERS: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092

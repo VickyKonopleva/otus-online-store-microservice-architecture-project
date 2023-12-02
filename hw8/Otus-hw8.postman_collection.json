@@ -495,7 +495,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Body matches string\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"Order: 'items' with price 1000$ for user User5@user.com start processing\");",
+									"    pm.expect(pm.response.text()).to.include(\"price 1000$ for user User5@user.com start processing\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -626,12 +626,11 @@
 							"script": {
 								"exec": [
 									"// Assuming your expected values",
-									"const expDescription = \"headphones\";",
+									"const expDescription = \"items\";",
 									"const expStatus = \"CANCELLED\";",
 									"",
 									"// Actual response from the API",
 									"const actualResponse = pm.response.json();",
-									"",
 									"// Check if there is an item with the specified name and amount",
 									"pm.test('Response contains', function () {",
 									"  const matchingItem = actualResponse.find(item => item.description === expDescription && item.status === expStatus);",
@@ -651,7 +650,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"setTimeout(function(){}, 2000);"
 								],
 								"type": "text/javascript"
 							}
@@ -688,7 +687,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://arch.homework/otusapp/victoria/orders/",
+							"raw": "http://arch.homework/otusapp/victoria/orders",
 							"protocol": "http",
 							"host": [
 								"arch",
@@ -697,8 +696,7 @@
 							"path": [
 								"otusapp",
 								"victoria",
-								"orders",
-								""
+								"orders"
 							]
 						}
 					},
@@ -917,7 +915,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "User7@user.com",
+									"value": "User5@user.com",
 									"type": "string"
 								},
 								{
@@ -939,13 +937,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8001/orders/generateIKey",
+							"raw": "http://arch.homework/otusapp/victoria/orders/generateIKey",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"arch",
+								"homework"
 							],
-							"port": "8001",
 							"path": [
+								"otusapp",
+								"victoria",
 								"orders",
 								"generateIKey"
 							]
@@ -954,7 +954,7 @@
 					"response": []
 				},
 				{
-					"name": "create order with auth and IKey No Item In Stock Copy",
+					"name": "create order with auth and IKey",
 					"event": [
 						{
 							"listen": "test",
@@ -1046,6 +1046,15 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -1117,7 +1126,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "User7@user.com",
+									"value": "User5@user.com",
 									"type": "string"
 								},
 								{
@@ -1139,13 +1148,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8001/orders/generateIKey",
+							"raw": "http://arch.homework/otusapp/victoria/orders/generateIKey",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"arch",
+								"homework"
 							],
-							"port": "8001",
 							"path": [
+								"otusapp",
+								"victoria",
 								"orders",
 								"generateIKey"
 							]
@@ -1243,6 +1254,15 @@
 									"  pm.expect(matchingItem.description).to.eql(expDescription);",
 									"  pm.expect(matchingItem.status).to.eql(expStatus);",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"setTimeout(function(){}, 2000);"
 								],
 								"type": "text/javascript"
 							}
@@ -1422,13 +1442,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8001/orders/generateIKey",
+							"raw": "http://arch.homework/otusapp/victoria/orders/generateIKey",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"arch",
+								"homework"
 							],
-							"port": "8001",
 							"path": [
+								"otusapp",
+								"victoria",
 								"orders",
 								"generateIKey"
 							]
@@ -1444,7 +1466,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Body matches string\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"price 100$ for user User7@user.com start processing at\");",
+									"    pm.expect(pm.response.text()).to.include(\"price 100$ for user User5@user.com start processing at\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1485,13 +1507,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8001/orders/",
+							"raw": "http://arch.homework/otusapp/victoria/orders/",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"arch",
+								"homework"
 							],
-							"port": "8001",
 							"path": [
+								"otusapp",
+								"victoria",
 								"orders",
 								""
 							]
@@ -1527,6 +1551,15 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -1548,13 +1581,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8001/orders",
+							"raw": "http://arch.homework/otusapp/victoria/orders",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"arch",
+								"homework"
 							],
-							"port": "8001",
 							"path": [
+								"otusapp",
+								"victoria",
 								"orders"
 							]
 						}

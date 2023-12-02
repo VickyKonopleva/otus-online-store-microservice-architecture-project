@@ -15,13 +15,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class IdempotenceKeyService {
-//    public static List<String> IDEMPOTENCE_KEYS = new ArrayList<>();
     private final RedisIdempotenceKeyRepository redisRepository;
 
     public String generateKey() {
         var key = String.valueOf(UUID.randomUUID());
         redisRepository.add(key);
-//        IDEMPOTENCE_KEYS.add(key);
         return key;
     }
 

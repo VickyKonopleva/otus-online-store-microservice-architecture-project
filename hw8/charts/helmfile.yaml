@@ -1,0 +1,11 @@
+releases:
+  - name: users-chart
+    chart: ./users-chart
+  - name: orders-chart
+    chart: ./orders-chart
+  - name: billing-chart
+    chart: ./billing-chart
+  - name: delivery-chart
+    chart: ./delivery-chart
+  - name: warehouse-chart
+    chart: ./warehouse-chart

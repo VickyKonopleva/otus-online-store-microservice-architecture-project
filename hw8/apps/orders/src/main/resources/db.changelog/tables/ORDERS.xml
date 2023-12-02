@@ -16,10 +16,14 @@
             <column  name="DESCRIPTION"  type="VARCHAR(255)">
                 <constraints nullable="false" />
             </column>
+            <column  name="ADDRESS"  type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
             <column  name="PRICE"  type="INTEGER">
                 <constraints nullable="false" />
             </column>
             <column  name="CREATION_TIME"  type="DATETIME" />
+            <column  name="STATUS"  type="VARCHAR(32)" />
         </createTable>
     </changeSet>
 

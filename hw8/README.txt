@@ -1,11 +1,9 @@
-hw6
-
-KAFKA
-install KAFKA
-kreate topic user_state
+hw8
 
 minikube start --memory 7400 --cpus 4
 
+KAFKA
+install KAFKA
 kubectl create namespace kafka
 kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 kubectl get pod -n kafka --watch
@@ -28,20 +26,14 @@ set password to oreders-chart configmap
 
 APP
 in folder users-chart:
-
 Helm package .
-
 helm repo update
+and so on for all charts folders
 
-helm install users-release users-0.1.0.tgz -f values.yaml
-
-in folder orders-chart:
-
-Helm package .
-
-helm repo update
-
-helm install orders-release orders-0.1.0.tgz -f values.yaml
+OR WITH HELMFILE command
+inside /charts folder
+helmfile apply
+to uninstall all releases: helmfile delete --purge
 
 GATEWAY
 kubectl apply -f gateway.yaml

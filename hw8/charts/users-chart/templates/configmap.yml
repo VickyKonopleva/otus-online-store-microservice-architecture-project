@@ -5,4 +5,4 @@ metadata:
 data:
   DB_USERNAME: postgres
   DB_URL: jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/
-  BOOTSTRAP_SERVERS: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9091
+  BOOTSTRAP_SERVERS: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092

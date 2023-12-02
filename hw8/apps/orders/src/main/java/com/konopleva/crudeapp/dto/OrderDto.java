@@ -16,4 +16,5 @@ import lombok.experimental.Accessors;
 public class OrderDto {
     private String description;
     private Integer price;
+    private String address;
 }

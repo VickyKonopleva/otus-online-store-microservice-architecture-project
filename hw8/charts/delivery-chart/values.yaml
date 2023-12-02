@@ -1,7 +1,7 @@
 fullnameOverride: delivery
 
 deployment:
-  replicas: 3
+  replicas: 2
   appImage: 
     repository: vikonopleva/delivery
   appPort: 8003
@@ -12,14 +12,6 @@ service:
 
 gateway:
   prefix: /otusapp/victoria/
-
-postgresql:
-  enabled: true
-  auth:
-    postgresPassword: vika
-  initdbScripts:
-    init-users-schema.sql: |
-      CREATE SCHEMA IF NOT EXISTS DELIVERY;
 
 metrics:
   serviceMonitor:

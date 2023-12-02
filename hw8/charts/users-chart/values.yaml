@@ -1,7 +1,7 @@
 fullnameOverride: users
 
 deployment:
-  replicas: 3
+  replicas: 2
   appImage: 
     repository: vikonopleva/users
   appPort: 8000
@@ -12,12 +12,27 @@ service:
 
 postgresql:
   enabled: true
-  auth:
-    postgresPassword: pass
-  initdbScripts:
-    init-users-schema.sql: |
-      CREATE SCHEMA IF NOT EXISTS USERS;
-
+  global:
+    postgresql:
+      # enabled: true
+      auth:
+        postgresPassword: vika
+  primary:
+    resources:
+      limits: 
+        memory: "1Gi"
+      requests:
+        memory: "1Gi"
+    initdb:
+      scripts:
+        init.sql: |
+          CREATE SCHEMA IF NOT EXISTS USERS;
+          CREATE SCHEMA IF NOT EXISTS ORDERS;
+          CREATE SCHEMA IF NOT EXISTS BILLING;
+          CREATE SCHEMA IF NOT EXISTS DELIVERY;
+          CREATE SCHEMA IF NOT EXISTS WAREHOUSE;
+          CREATE SCHEMA IF NOT EXISTS NOTIFICATIONS;
+  
 metrics:
   serviceMonitor:
     enabled: true

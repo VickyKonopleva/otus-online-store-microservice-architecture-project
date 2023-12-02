@@ -26,19 +26,24 @@ public class OrderController {
     @IdempotenceKey
     @PostMapping("/")
     public ResponseEntity<String> createOrder(@RequestBody OrderDto dto) {
+        //form order
         var order = orderService.createOrder(dto);
-        String message = "Order: '%s' with price %s$ for user %s created at %s";
+        //send async request to billing service
+
+        //send message OrderCreated to Kafka
+        String message = "Order: '%s' with id '%s' price %s$ for user %s start processing at %s";
         return new ResponseEntity<>(
                 String.format(
                         message,
                         order.getDescription(),
+                        order.getId(),
                         order.getPrice(),
                         order.getAssociatedUserEmail(),
                         order.getCreationTime()),
                 HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Order>> getAllUserOrders() {
         var orders = orderService.getAllUserOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);

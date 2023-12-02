@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+    <changeSet  author="${author}"  id="6f675c05-1d5b-4629-94c1-1cd6bea0db3d">
+        <insert tableName="ITEMS">
+            <column name="ID" value="89e57aae-46d7-4018-8f1e-829170e32aaa"/>
+            <column name="NAME" value="phone"/>
+            <column name="AMOUNT" value="3"/>
+        </insert>
+        <insert tableName="ITEMS">
+            <column name="ID" value="ec548a7a-106f-4769-971c-a3acb8908c2b"/>
+            <column name="NAME" value="laptop"/>
+            <column name="AMOUNT" value="3"/>
+        </insert>
+        <insert tableName="ITEMS">
+            <column name="ID" value="2c0d2c78-5d21-4d83-8826-1f75bc61e9cf"/>
+            <column name="NAME" value="headphones"/>
+            <column name="AMOUNT" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

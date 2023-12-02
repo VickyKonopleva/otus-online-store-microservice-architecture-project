@@ -11,6 +11,7 @@ spring:
     change-log: "classpath:db.changelog/update.xml"
     enabled: true
     drop-first: false
+    default-schema: USERS
   h2:
     console:
       enabled: false
@@ -18,10 +19,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: USERS
 
 kafka:
   topics:
-    user-state: USERS.USER_STATE
+    user-state: USER_STATE
   bootstrap-servers: ${BOOTSTRAP_SERVERS}
 
 

@@ -4,7 +4,6 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-
     <changeSet  author="${author}"  id="1cf6d325-ead8-4dbd-a5d5-54fd03d0962c">
         <createTable tableName="USERS">
             <column  name="EMAIL"  type="VARCHAR(255)">
