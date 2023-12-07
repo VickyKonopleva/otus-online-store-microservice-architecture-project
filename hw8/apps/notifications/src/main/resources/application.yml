@@ -1,0 +1,56 @@
+server:
+    servlet.context-path: /
+    port: 8005
+spring:
+  datasource:
+    url: jdbc:h2:mem:default
+    username: Victoria
+    password:
+  liquibase:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    change-log: "classpath:db.changelog/update.xml"
+    enabled: true
+    drop-first: false
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+kafka:
+  consumer:
+    group-id: local-notifications
+    properties:
+      spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+      spring.json.value.default.type: java.lang.String
+      spring.deserializer.key.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+  topics:
+    user-state: USER_STATE
+    order-state: ORDER_STATE
+    order-payment-accepted: ORDER_PAYMENT
+    order-payment-declined: ORDER_DECLINED
+    order-delivery-scheduled: DELIVERY_START
+    order-delivery-cancel: DELIVERY_CANCEL
+    item-reserve-cancelled: RESERVE_CANCEL
+  bootstrap-servers: 127.0.0.1:9092
+
+management.endpoints.web.exposure.include: health, prometheus
+management.endpoint.prometheus.enabled: true
+management.endpoints.web.base-path: /
+management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
+
+
+
+
+
+
+
+
+
