@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "notifications.fullname" . }}-configmap
+data:
+  DB_USERNAME: postgres
+  DB_URL: jdbc:postgresql://users-chart-postgresql:5432/
+  BOOTSTRAP_SERVERS: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092

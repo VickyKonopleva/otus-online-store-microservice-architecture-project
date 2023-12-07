@@ -1,0 +1,18 @@
+fullnameOverride: notifications
+
+deployment:
+  replicas: 2
+  appImage: 
+    repository: vikonopleva/notifications
+  appPort: 8005
+
+service:
+  appPort: 8005
+  serviceType: ClusterIP
+
+gateway:
+  prefix: /otusapp/victoria/
+
+metrics:
+  serviceMonitor:
+    enabled: true

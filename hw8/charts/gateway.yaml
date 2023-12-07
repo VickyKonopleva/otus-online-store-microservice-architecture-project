@@ -64,4 +64,14 @@ spec:
         host: warehouse
         port:
           number: 8004
+  - match:
+    - uri:
+        prefix: /otusapp/victoria/notifications
+    rewrite:
+      uri: /notifications
+    route:
+    - destination:
+        host: notifications
+        port:
+          number: 8005
   

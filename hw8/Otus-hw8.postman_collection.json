@@ -1597,6 +1597,49 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "get all notifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON",
+									"var responseBody = pm.response.json();",
+									"",
+									"// Check the number of items in the JSON",
+									"pm.test('Response body contains exactly 12 items', function () {",
+									"    pm.expect(Object.keys(responseBody).length).to.equal(12);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://arch.homework/otusapp/victoria/notifications",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"otusapp",
+								"victoria",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [

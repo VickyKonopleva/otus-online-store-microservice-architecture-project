@@ -18,6 +18,8 @@ postgresql:
       auth:
         postgresPassword: vika
   primary:
+    extendedConfiguration: |
+      max_connections=200
     resources:
       limits: 
         memory: "1Gi"

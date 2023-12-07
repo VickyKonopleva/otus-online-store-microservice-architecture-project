@@ -3,7 +3,6 @@ hw8
 minikube start --memory 7400 --cpus 4
 
 KAFKA
-install KAFKA
 kubectl create namespace kafka
 kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 kubectl get pod -n kafka --watch
@@ -18,8 +17,8 @@ export PATH=$PWD/bin:$PATH
 istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 
-REDIS
-helm install redis-service --set auth.password=VgUQ9mjbH3 bitnami/redis
+REDIS(only one replica for resources control)
+helm install redis-service --set auth.password=VgUQ9mjbH3 --set cluster.slaveCount=0 bitnami/redis
 get redis password
 export REDIS_PASSWORD=$(kubectl get secret --namespace default redis-test -o jsonpath="{.data.redis-password}" | base64 --decode)
 set password to oreders-chart configmap

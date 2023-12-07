@@ -9,3 +9,5 @@ releases:
     chart: ./delivery-chart
   - name: warehouse-chart
     chart: ./warehouse-chart
+  - name: notifications-chart
+    chart: ./notifications-chart
