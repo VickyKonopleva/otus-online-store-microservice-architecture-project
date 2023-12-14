@@ -81,6 +81,7 @@ public class DeliveryService {
                 entity = deliveryRepository.save(entity);
                 var deliveryState = new DeliveryState()
                         .setId(entity.getId())
+                        .setPrice(orderState.getPrice())
                         .setOrderId(orderState.getId())
                         .setAssociatedUserEmail(orderState.getAssociatedUserEmail())
                         .setAddress(orderState.getAddress())

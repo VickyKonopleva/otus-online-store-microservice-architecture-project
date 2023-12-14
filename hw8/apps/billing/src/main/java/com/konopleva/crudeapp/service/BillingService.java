@@ -3,6 +3,7 @@ package com.konopleva.crudeapp.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.konopleva.crudeapp.dto.OrderDto;
+import com.konopleva.crudeapp.dto.kafka.DeliveryState;
 import com.konopleva.crudeapp.dto.kafka.OrderState;
 import com.konopleva.crudeapp.dto.kafka.UserStateDto;
 import com.konopleva.crudeapp.entity.AccountBilling;
@@ -107,6 +108,23 @@ public class BillingService {
         cancelPayment(orderState);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public void processDeliveryCancelledKafkaMessage(String value) throws JsonProcessingException {
+        var deliveryState = objectMapper.readValue(value, DeliveryState.class);
+        log.info("Kafka message Delivery Cancelled consumed. Parameters: order id = {}, user = {}, adress = {}. " +
+                        "Trying to cancel payment...",
+                deliveryState.getOrderId(), deliveryState.getAssociatedUserEmail(), deliveryState.getAddress());
+        cancelPaymentDueToDeliveryCancelled(deliveryState);
+    }
+
+    private void cancelPaymentDueToDeliveryCancelled(DeliveryState deliveryState) {
+        var account = accountRepository.findByEmail(deliveryState.getAssociatedUserEmail());
+        if (account.isPresent()) {
+            var accountEntity = account.get();
+            accountEntity.setBalance(accountEntity.getBalance().add(BigDecimal.valueOf(deliveryState.getPrice())));
+        }
+    }
+
     private void cancelPayment(OrderState orderState) {
         var account = accountRepository.findByEmail(orderState.getAssociatedUserEmail());
         if (account.isPresent()) {
@@ -153,5 +171,4 @@ public class BillingService {
             log.info("Send message to kafka about payment declined for order with id {}", orderState.getId());
         }
     }
-
 }
