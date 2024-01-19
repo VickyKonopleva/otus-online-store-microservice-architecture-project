@@ -14,7 +14,6 @@ postgresql:
   enabled: true
   global:
     postgresql:
-      # enabled: true
       auth:
         postgresPassword: vika
   primary:

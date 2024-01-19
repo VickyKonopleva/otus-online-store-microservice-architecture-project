@@ -1,4 +1,13 @@
-hw8
+Онлайн-магазин/Online-Store webapp
+
+Функционал онлайн-магазина поделен между 6 микросервисами: users, orders, billing, delivery, warehouse, notifications
+
+
+Пользовательские сценарии:
+
+![Getting Started](img/Online-store-diagram.png)
+
+Запуск приложения из консоли в minikube/start application:
 
 minikube start --memory 7400 --cpus 4
 
@@ -23,13 +32,9 @@ get redis password
 export REDIS_PASSWORD=$(kubectl get secret --namespace default redis-test -o jsonpath="{.data.redis-password}" | base64 --decode)
 set password to oreders-chart configmap
 
-APP
-in folder users-chart:
-Helm package .
-helm repo update
-and so on for all charts folders
+APP charts
 
-OR WITH HELMFILE command
+WITH HELMFILE command:
 inside /charts folder
 helmfile apply
 to uninstall all releases: helmfile delete --purge
@@ -41,12 +46,12 @@ minikube tunnel
 
 VIEW the DASHBOARDS
 from root:
-
 cd istio
 kubectl apply -f samples/addons
 kubectl rollout status deployment/kiali -n istio-system
 istioctl dashboard kiali
 
+TESTING
 RUN REQUEST COLLECTION
 
 npm install -g newman
